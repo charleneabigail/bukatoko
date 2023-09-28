@@ -1,30 +1,10 @@
-const products = [
-  {
-    id: 1,
-    name: "Shampoo",
-    price: 10000,
-  },
-  {
-    id: 2,
-    name: "Baygon",
-    price: 20000,
-  },
-  {
-    id: 3,
-    name: "Pepsodent",
-    price: 15000,
-  },
-];
+const { Product } = require('../models');
 
 module.exports = {
-  postProduct: (req, res) => {
+  postProduct: async (req, res) => {
     const { name, price } = req.body;
 
-    products.push({
-      id: products.length + 1,
-      name,
-      price,
-    });
+    await Product.create({ name, price });
 
     return res.send({
       status: "ok",
@@ -34,7 +14,9 @@ module.exports = {
       },
     });
   },
-  getProducts: (req, res) => {
+  getProducts: async (req, res) => {
+    const products = await Product.findAll();
+
     return res.send({
       status: "ok",
       data: products,
