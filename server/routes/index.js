@@ -15,5 +15,6 @@ router.get("/products", product.getProducts);
 router.post("/products", product.postProduct);
 
 router.post("/login", user.postLogin);
+router.post("/register", user.postRegister);
 
 module.exports = router;
